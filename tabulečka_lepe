@@ -1,0 +1,42 @@
+-- ============================================
+-- DDL - Databáze: Půjčovna videoher
+-- ============================================
+
+-- Smazání tabulek (pokud existují)
+DROP TABLE IF EXISTS Pujcky;
+DROP TABLE IF EXISTS Zakaznici;
+DROP TABLE IF EXISTS Hry;
+
+-- ============================================
+-- TABULKA: Hry
+-- ============================================
+CREATE TABLE Hry (
+    ID_hry INT PRIMARY KEY AUTO_INCREMENT,
+    Nazev VARCHAR(100) NOT NULL,
+    Zanr VARCHAR(50) NOT NULL,
+    Platforma VARCHAR(50) NOT NULL,
+    Rok_vydani INT CHECK (Rok_vydani > 1970)
+);
+
+-- ============================================
+-- TABULKA: Zakaznici
+-- ============================================
+CREATE TABLE Zakaznici (
+    ID_zakaznika INT PRIMARY KEY AUTO_INCREMENT,
+    Jmeno VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) UNIQUE,
+    Telefon VARCHAR(20)
+);
+
+-- ============================================
+-- TABULKA: Pujcky
+-- ============================================
+CREATE TABLE Pujcky (
+    ID_pujcky INT PRIMARY KEY AUTO_INCREMENT,
+    ID_zakaznika INT NOT NULL,
+    ID_hry INT NOT NULL,
+    Datum_pujceni DATE NOT NULL,
+    Datum_vraceni DATE,
+   
+    CONSTRAINT fk_zakaznik
+        FOREIGN KEY (ID_zak
